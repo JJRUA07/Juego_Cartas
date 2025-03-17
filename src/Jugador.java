@@ -7,7 +7,7 @@ public class Jugador {
     private int TOTAL_CARTAS = 10;
     private int MARGEN = 10;
     private int DISTANCIA = 40;
-    private int puntaje = 0;
+    private int puntaje;
 
     private Carta[] cartas = new Carta[TOTAL_CARTAS];
     private Random r = new Random();
@@ -16,7 +16,7 @@ public class Jugador {
         for (int i = 0; i < cartas.length; i++) {
             cartas[i] = new Carta(r);
         }
-        puntaje = 0; // Reiniciar puntaje al repartir nuevas cartas
+
     }
 
     public void mostrar(JPanel pnl) {
@@ -30,6 +30,8 @@ public class Jugador {
     }
 
     public String getGrupos() {
+        puntaje = 0; // Reiniciar puntaje antes de calcularlo nuevamente
+        
         String mensaje = "No se encontraron grupos";
         int[] contadores = new int[NombreCarta.values().length];
         for (Carta c : cartas) {
@@ -60,7 +62,7 @@ public class Jugador {
             mensaje += "\n¡Escalera de " + pintaEscalera + " encontrada!";
         }
 
-        puntaje += calcularPuntajeSinGrupo(); // Sumar puntaje de cartas sin grupo
+        puntaje = calcularPuntajeSinGrupo(); // Calcular correctamente el puntaje
         return mensaje + "\nPuntaje: " + puntaje;
     }
 
